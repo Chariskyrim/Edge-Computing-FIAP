@@ -1,0 +1,20 @@
+#include<Servo.h>
+int servoPin = 11;
+
+Servo servoMotor;
+
+void setup() {
+  pinMode(servoPin, OUTPUT);
+  servoMotor.attach(servoPin);
+
+}
+
+void loop() {
+  servoMotor.write(90);
+  delay(1000);
+  servoMotor.write(180);
+  delay(1000);
+  servoMotor.write(0);
+  delay(1000);
+
+}
