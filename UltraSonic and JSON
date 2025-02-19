@@ -1,0 +1,41 @@
+#include<ArduinoJson.h>
+
+#define trigger 7
+#define echo 8
+
+int dist = 0;
+
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(trigger, OUTPUT);
+  pinMode(echo, INPUT);
+
+}
+
+void loop() {
+
+  digitalWrite(trigger, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigger, LOW);
+  
+  dist = pulseIn(echo, HIGH);
+
+  dist /= 58;
+
+
+
+
+//Alocando buffer de memoria no documento
+ StaticJsonDocument<100>json;
+
+//criando o objeto JSON 
+ json["Distancia"] = dist;
+ 
+ serializeJson(json, Serial);
+ Serial.println();
+
+
+  
+
+}
