@@ -1,0 +1,34 @@
+#include <DHT.h>
+#include<ArduinoJson.h>
+
+#define dhtpin 2
+#define dhttype DHT11
+
+DHT dht(dhtpin, dhttype);
+
+
+void setup() {
+  dht.begin();
+  Serial.begin(9600);
+}
+
+void loop() {
+  
+  int temp = dht.readTemperature();
+  int umi = dht.readHumidity();
+
+//Alocando buffer de memoria no documento
+ StaticJsonDocument<100>json;
+
+//criando o objeto JSON
+ json["Temperatura"] = temp; 
+ json["Umidade"] = umi;
+
+
+ serializeJson(json, Serial);
+
+ Serial.println();
+
+ delay(2000);
+
+}
